@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using Amazon;
 using System.Threading;
 using WebApplicationBeanstalk.Models;
-using Amazon.DynamoDBv2.DataModel;
-using Amazon.DynamoDBv2;
 using System.Threading.Tasks;
 using System.Net.Mime;
 using System.IO;
-using Amazon.DynamoDBv2.Model;
 using Microsoft.AspNetCore.Mvc;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.Model;
 
 namespace WebApplicationBeanstalk.Service
 {
@@ -26,7 +26,6 @@ namespace WebApplicationBeanstalk.Service
             Context = new DynamoDBContext(Client);
             CreateTable();
         }
-
         public async Task<User> Register(User user)
         {
             await Context.SaveAsync(user, default(System.Threading.CancellationToken));
@@ -69,7 +68,7 @@ namespace WebApplicationBeanstalk.Service
             //movie.Cover.UploadFrom(CoverPath);
             //movie.Video.UploadFrom(VideoPath);
 
-            Context.SaveAsync<Movie>(movie);
+            await Context.SaveAsync<Movie>(movie);
             return await GetMovie(movie.Id);
         }
 
