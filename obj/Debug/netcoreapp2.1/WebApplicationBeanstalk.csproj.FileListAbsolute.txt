@@ -31,3 +31,4 @@ C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\W
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.cshtml.g.cs
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.csproj.CoreCompileInputs.cache
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Home\RegistrationForm.cshtml.g.cs
+C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Home\Movies.cshtml.g.cs
