@@ -25,7 +25,6 @@
       "WebApplicationBeanstalk/1.0.0": {
         "dependencies": {
           "AWSSDK.Core": "3.5.1.29",
-          "AWSSDK.DynamoDBv2": "3.5.1.7",
           "AWSSDK.Extensions.NETCore.Setup": "3.3.101",
           "AWSSDK.S3": "3.5.3.7",
           "Microsoft.AspNetCore": "2.1.7",
@@ -60,20 +59,6 @@
         },
         "compile": {
           "lib/netstandard2.0/AWSSDK.Core.dll": {}
-        }
-      },
-      "AWSSDK.DynamoDBv2/3.5.1.7": {
-        "dependencies": {
-          "AWSSDK.Core": "3.5.1.29"
-        },
-        "runtime": {
-          "lib/netstandard2.0/AWSSDK.DynamoDBv2.dll": {
-            "assemblyVersion": "3.3.0.0",
-            "fileVersion": "3.5.1.7"
-          }
-        },
-        "compile": {
-          "lib/netstandard2.0/AWSSDK.DynamoDBv2.dll": {}
         }
       },
       "AWSSDK.Extensions.NETCore.Setup/3.3.101": {
@@ -3746,13 +3731,6 @@
       "sha512": "sha512-Qc0HxTZ8P4L/laNDObmKsQu2LdqvhOPeIssEyqcvp8FUXN8RVvPORJDoCV8lG3pCXThL4fBMjQ9kbIR4F1+Jnw==",
       "path": "awssdk.core/3.5.1.29",
       "hashPath": "awssdk.core.3.5.1.29.nupkg.sha512"
-    },
-    "AWSSDK.DynamoDBv2/3.5.1.7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-KWn440NkYevyp0UVloZnhhTxfYypqwQmIlrrjBnYeChhYg9oGQIPxmP3a9KNTOyLZMXc8lbJrxcJm/DpnR3xwA==",
-      "path": "awssdk.dynamodbv2/3.5.1.7",
-      "hashPath": "awssdk.dynamodbv2.3.5.1.7.nupkg.sha512"
     },
     "AWSSDK.Extensions.NETCore.Setup/3.3.101": {
       "type": "package",

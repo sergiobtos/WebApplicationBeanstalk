@@ -45,7 +45,6 @@ C:\COMP306\WebApplicationBeanstalk\bin\Debug\netcoreapp2.1\WebApplicationBeansta
 C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.csprojAssemblyReference.cache
 C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.AssemblyInfoInputs.cache
 C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.AssemblyInfo.cs
-C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.csproj.CoreCompileInputs.cache
 C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.RazorAssemblyInfo.cache
 C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.RazorAssemblyInfo.cs
 C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.TagHelpers.input.cache

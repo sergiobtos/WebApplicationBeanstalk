@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Amazon;
 using System.Threading;
 using WebApplicationBeanstalk.Models;
 using System.Threading.Tasks;
-using System.Net.Mime;
-using System.IO;
-using Microsoft.AspNetCore.Mvc;
+using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.Model;
@@ -17,8 +14,8 @@ namespace WebApplicationBeanstalk.Service
     {
         AmazonDynamoDBClient Client;
         DynamoDBContext Context;
-        RegionEndpoint BucketRegion = RegionEndpoint.CACentral1;
         string Tmp = AppDomain.CurrentDomain.BaseDirectory;
+        RegionEndpoint BucketRegion = RegionEndpoint.CNNorth1;
 
         public AWSServices()
         {
@@ -65,8 +62,8 @@ namespace WebApplicationBeanstalk.Service
             movie.Cover = S3Link.Create(Context, bucketName, movie.Id + "1", BucketRegion);
             movie.Video = S3Link.Create(Context, bucketName, movie.Id + "2", BucketRegion);
 
-            //movie.Cover.UploadFrom(CoverPath);
-            //movie.Video.UploadFrom(VideoPath);
+            movie.Cover.UploadFrom(CoverPath);
+            movie.Video.UploadFrom(VideoPath);
 
             await Context.SaveAsync<Movie>(movie);
             return await GetMovie(movie.Id);
@@ -213,10 +210,10 @@ namespace WebApplicationBeanstalk.Service
         //}
 
 
-        public async void CreateTable()
+        public void CreateTable()
         {
             String tableName = "User";
-            List<string> currentTables = (await Client.ListTablesAsync()).TableNames;
+            List<string> currentTables = Client.ListTables().TableNames;
             bool tablesAdded = false;
             if (!currentTables.Contains(tableName))
             {
@@ -266,7 +263,7 @@ namespace WebApplicationBeanstalk.Service
                     allActive = true;
                     Thread.Sleep(TimeSpan.FromSeconds(5));
 
-                    TableStatus tableStatus = await GetTableStatus(Client, tableName);
+                    TableStatus tableStatus = GetTableStatus(Client, tableName);
                     if (!object.Equals(tableStatus, TableStatus.ACTIVE))
                         allActive = false;
 
@@ -275,11 +272,11 @@ namespace WebApplicationBeanstalk.Service
         }
 
 
-        private async static Task<TableStatus> GetTableStatus(AmazonDynamoDBClient client, string tableName)
+        private static TableStatus GetTableStatus(AmazonDynamoDBClient client, string tableName)
         {
             try
             {
-                var table = (await client.DescribeTableAsync(new DescribeTableRequest { TableName = tableName })).Table;
+                var table = client.DescribeTable(new DescribeTableRequest { TableName = tableName }).Table;
                 return (table == null) ? null : table.TableStatus;
             }
             catch (AmazonDynamoDBException db)

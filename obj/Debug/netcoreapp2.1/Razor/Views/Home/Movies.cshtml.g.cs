@@ -61,7 +61,7 @@ using WebApplicationBeanstalk.Models;
             WriteLiteral("\r\n<h2>Movies</h2>\r\n\r\n<p>\r\n    ");
             EndContext();
             BeginContext(92, 81, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d7933479b38746cd96358a05a976616b", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7d0a6876ed5a49b297ea126529321a32", async() => {
                 BeginContext(115, 8, true);
                 WriteLiteral("Welcome ");
                 EndContext();
@@ -119,7 +119,7 @@ using WebApplicationBeanstalk.Models;
             WriteLiteral("\r\n                </td>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(616, 59, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e9960cff396e4d76aad23dbbb6a5f422", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e8a82efc28d34290ac41d93b11c066ff", async() => {
                 BeginContext(664, 7, true);
                 WriteLiteral("Details");
                 EndContext();
