@@ -24,7 +24,7 @@ namespace WebApplicationBeanstalk.Service
         {
             Client = new AmazonDynamoDBClient(BucketRegion);
             Context = new DynamoDBContext(Client);
-            //CreateTable();
+            CreateTable();
         }
 
         public async Task<User> Register(User user)
@@ -214,7 +214,7 @@ namespace WebApplicationBeanstalk.Service
         //}
 
 
-        public async void CreateUserTable()
+        public async void CreateTable()
         {
             String tableName = "User";
             List<string> currentTables = (await Client.ListTablesAsync()).TableNames;
