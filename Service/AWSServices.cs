@@ -46,7 +46,10 @@ namespace WebApplicationBeanstalk.Service
         public async Task<List<Movie>> GetMovies()
         {
             var conditions = new List<ScanCondition>();
-            return await Context.ScanAsync<Movie>(conditions).GetRemainingAsync(); ;
+            List<Movie> movies= await Context.ScanAsync<Movie>(conditions).GetRemainingAsync();
+            foreach(Movie movie in movies)
+                movie.Cover.DownloadTo(Tmp + movie.Id + ".jpg");
+            return movies;
         }
 
         public async Task<Movie> GetMovie(string Id)
@@ -148,35 +151,35 @@ namespace WebApplicationBeanstalk.Service
         //}
 
 
-        //public void DownloadFiles(Movie movie)
-        //{
-        //    Boolean found = false;
-        //    int attemps = 0;
-        //    while (!found && attemps <= 5)
-        //    {
-        //        try
-        //        {
-        //            if (!System.IO.File.Exists(tmp + movie.Title + ".jpg"))
-        //                movie.Cover.DownloadTo(tmp + movie.Title + ".jpg");
-        //            if (!System.IO.File.Exists(tmp + movie.Title + ".pdf"))
-        //                movie.PDFFile.DownloadTo(tmp + movie.Title + ".pdf");
+        public void DownloadFiles(Movie movie)
+        {
+            Boolean found = false;
+            int attemps = 0;
+            while (!found && attemps <= 5)
+            {
+                try
+                {
+                    if (!System.IO.File.Exists(tmp + movie.Title + ".jpg"))
+                        movie.Cover.DownloadTo(tmp + movie.Title + ".jpg");
+                    if (!System.IO.File.Exists(tmp + movie.Title + ".pdf"))
+                        movie.PDFFile.DownloadTo(tmp + movie.Title + ".pdf");
 
-        //            if (System.IO.File.Exists(tmp + movie.Title + ".jpg")
-        //                && System.IO.File.Exists(tmp + movie.Title + ".pdf"))
-        //            {
-        //                found = true;
-        //                break;
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Console.WriteLine("Failed attempt (" + attemps + ") to retrieve the book (" + movie.Title + ")");
-        //            attemps++;
-        //        }
-        //    }
+                    if (System.IO.File.Exists(tmp + movie.Title + ".jpg")
+                        && System.IO.File.Exists(tmp + movie.Title + ".pdf"))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Failed attempt (" + attemps + ") to retrieve the book (" + movie.Title + ")");
+                    attemps++;
+                }
+            }
 
 
-        //}
+        }
 
 
         //public List<Movie> GetAllBooks(String email)
