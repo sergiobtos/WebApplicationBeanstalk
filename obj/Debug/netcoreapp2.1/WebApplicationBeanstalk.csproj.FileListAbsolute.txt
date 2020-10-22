@@ -17,7 +17,6 @@ C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\W
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.TagHelpers.output.cache
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.RazorCoreGenerate.cache
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.cshtml.g.cs
@@ -31,4 +30,4 @@ C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\W
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.csproj.CopyComplete
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.cshtml.g.cs
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.csproj.CoreCompileInputs.cache
-C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Home\RegistratrionForm.cshtml.g.cs
+C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Home\RegistrationForm.cshtml.g.cs

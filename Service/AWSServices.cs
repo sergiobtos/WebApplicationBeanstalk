@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Net.Mime;
 using System.IO;
 using Amazon.DynamoDBv2.Model;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplicationBeanstalk.Service
 {
@@ -23,20 +24,13 @@ namespace WebApplicationBeanstalk.Service
         {
             Client = new AmazonDynamoDBClient(BucketRegion);
             Context = new DynamoDBContext(Client);
-            CreateTable();
+            //CreateTable();
         }
 
-        public async Task<User> Register(String email, String name, String password)
+        public async Task<User> Register(User user)
         {
-            User user = new User()
-            {
-                Email = email,
-                Name = name,
-                Password = password
-            };
-
-            await Context.SaveAsync<User>(user);
-            user = await Context.LoadAsync<User>(email); 
+            await Context.SaveAsync(user, default(System.Threading.CancellationToken));
+            User newUser = await Context.LoadAsync<User>(user.Email, default(System.Threading.CancellationToken));
             return user;
         }
 
@@ -220,7 +214,7 @@ namespace WebApplicationBeanstalk.Service
         //}
 
 
-        public async void CreateTable()
+        public async void CreateUserTable()
         {
             String tableName = "User";
             List<string> currentTables = (await Client.ListTablesAsync()).TableNames;
