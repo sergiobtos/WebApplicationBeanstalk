@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Comp306_AWSAmazon\\Lab3\\Code\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj": {}
+    "C:\\COMP306\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj": {}
   },
   "projects": {
-    "C:\\Comp306_AWSAmazon\\Lab3\\Code\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj": {
+    "C:\\COMP306\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Comp306_AWSAmazon\\Lab3\\Code\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj",
+        "projectUniqueName": "C:\\COMP306\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj",
         "projectName": "WebApplicationBeanstalk",
-        "projectPath": "C:\\Comp306_AWSAmazon\\Lab3\\Code\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj",
-        "packagesPath": "C:\\Users\\sergi\\.nuget\\packages\\",
-        "outputPath": "C:\\Comp306_AWSAmazon\\Lab3\\Code\\WebApplicationBeanstalk\\obj\\",
+        "projectPath": "C:\\COMP306\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj",
+        "packagesPath": "C:\\Users\\Caique\\.nuget\\packages\\",
+        "outputPath": "C:\\COMP306\\WebApplicationBeanstalk\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sergi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Caique\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -49,6 +49,10 @@
             "AWSSDK.Extensions.NETCore.Setup": {
               "target": "Package",
               "version": "[3.3.101, )"
+            },
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.5.3.1, )"
             },
             "Microsoft.AspNetCore": {
               "target": "Package",

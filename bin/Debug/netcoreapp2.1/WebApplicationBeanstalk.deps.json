@@ -54,7 +54,7 @@
         "runtime": {
           "lib/netstandard2.0/AWSSDK.Core.dll": {
             "assemblyVersion": "3.3.0.0",
-            "fileVersion": "3.5.1.28"
+            "fileVersion": "3.5.1.23"
           }
         },
         "compile": {
