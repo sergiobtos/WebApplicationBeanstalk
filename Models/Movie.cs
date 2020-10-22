@@ -10,9 +10,13 @@ namespace WebApplicationBeanstalk.Models
     public class Movie
     {
         [DynamoDBHashKey]
+        public string Id { get; set; }
+
         public string Title { get; set; }
 
-        public S3Link File { get; set; }
+        public S3Link Cover { get; set; }
+
+        public S3Link Video { get; set; }
 
         [DynamoDBProperty(AttributeName = "Ratings")]
         public List<Rating> Ratings { get; set; }
