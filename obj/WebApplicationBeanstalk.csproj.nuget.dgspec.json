@@ -38,6 +38,18 @@
       "frameworks": {
         "netcoreapp2.1": {
           "dependencies": {
+            "AWSSDK.Core": {
+              "target": "Package",
+              "version": "[3.5.1.28, )"
+            },
+            "AWSSDK.DynamoDBv2": {
+              "target": "Package",
+              "version": "[3.5.1.6, )"
+            },
+            "AWSSDK.Extensions.NETCore.Setup": {
+              "target": "Package",
+              "version": "[3.3.101, )"
+            },
             "Microsoft.AspNetCore.App": {
               "suppressParent": "All",
               "target": "Package",
