@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "zzJAmC1gezdRlY6Qiq1/HcuLdfPrW+W0paRrDNAB4Tj2PkUe0s0pyUw5eOzsI+u2zVLTAi40vQOKz4P4Jq7H4Q==",
+  "dgSpecHash": "5eFbZqgqxycGpLTijGGNYp0Ebua8mgbHvynRd8m1tMKOUhCamLylJvXRhw1tluk+qlQO+R0gJu9ydzkeXCn1eA==",
   "success": true,
   "projectFilePath": "C:\\COMP306\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Caique\\.nuget\\packages\\awssdk\\2.3.55.2\\awssdk.2.3.55.2.nupkg.sha512",
+    "C:\\Users\\Caique\\.nuget\\packages\\awssdk.core\\3.5.1.29\\awssdk.core.3.5.1.29.nupkg.sha512",
+    "C:\\Users\\Caique\\.nuget\\packages\\awssdk.dynamodbv2\\3.5.1.7\\awssdk.dynamodbv2.3.5.1.7.nupkg.sha512",
+    "C:\\Users\\Caique\\.nuget\\packages\\awssdk.extensions.netcore.setup\\3.3.101\\awssdk.extensions.netcore.setup.3.3.101.nupkg.sha512",
+    "C:\\Users\\Caique\\.nuget\\packages\\awssdk.s3\\3.5.3.7\\awssdk.s3.3.5.3.7.nupkg.sha512",
     "C:\\Users\\Caique\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
     "C:\\Users\\Caique\\.nuget\\packages\\microsoft.aspnetcore\\2.1.7\\microsoft.aspnetcore.2.1.7.nupkg.sha512",
     "C:\\Users\\Caique\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.1.1\\microsoft.aspnetcore.antiforgery.2.1.1.nupkg.sha512",
@@ -99,6 +102,7 @@
     "C:\\Users\\Caique\\.nuget\\packages\\microsoft.aspnetcore.staticfiles\\2.1.1\\microsoft.aspnetcore.staticfiles.2.1.1.nupkg.sha512",
     "C:\\Users\\Caique\\.nuget\\packages\\microsoft.aspnetcore.websockets\\2.1.1\\microsoft.aspnetcore.websockets.2.1.1.nupkg.sha512",
     "C:\\Users\\Caique\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.1.1\\microsoft.aspnetcore.webutilities.2.1.1.nupkg.sha512",
+    "C:\\Users\\Caique\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\Caique\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\1.1.0\\microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512",
     "C:\\Users\\Caique\\.nuget\\packages\\microsoft.codeanalysis.common\\2.8.0\\microsoft.codeanalysis.common.2.8.0.nupkg.sha512",
     "C:\\Users\\Caique\\.nuget\\packages\\microsoft.codeanalysis.csharp\\2.8.0\\microsoft.codeanalysis.csharp.2.8.0.nupkg.sha512",
@@ -302,16 +306,5 @@
     "C:\\Users\\Caique\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
     "C:\\Users\\Caique\\.nuget\\packages\\system.xml.xpath.xdocument\\4.3.0\\system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'AWSSDK 2.3.55.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
-      "libraryId": "AWSSDK",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.1"
-      ]
-    }
-  ]
+  "logs": []
 }

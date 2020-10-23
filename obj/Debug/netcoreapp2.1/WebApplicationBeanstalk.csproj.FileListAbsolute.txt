@@ -66,3 +66,4 @@ C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeansta
 C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.pdb
 C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.genruntimeconfig.cache
 C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.csproj.CopyComplete
+C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeanstalk.csproj.CoreCompileInputs.cache
