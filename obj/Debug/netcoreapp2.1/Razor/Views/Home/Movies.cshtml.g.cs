@@ -71,7 +71,7 @@ using WebApplicationBeanstalk.Models;
             WriteLiteral(" Here the list of your movies</h1>\r\n<p class=\"lead\">\r\n    If you want to add a new movie, choose a bucket below and click send afterwards.\r\n</p>\r\n<div>\r\n    ");
             EndContext();
             BeginContext(251, 75, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fead16a8d40a43b28ebde2cfdbf84bcd", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56c23e0bb1854c82a6d1ac4f9d8fd191", async() => {
                 BeginContext(312, 10, true);
                 WriteLiteral("Add Movies");
                 EndContext();
@@ -135,7 +135,7 @@ WriteAttributeValue("", 636, item.Cover.GetPreSignedURL(DateTime.Now.AddHours(1)
             WriteLiteral("\r\n                </td>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(934, 135, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "06d7c13465f74b04a263115c9f0075f9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3d08be1965b546f5a4654c34f64f7f0f", async() => {
                 BeginContext(1058, 7, true);
                 WriteLiteral("Details");
                 EndContext();

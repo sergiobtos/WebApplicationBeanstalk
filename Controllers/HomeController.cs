@@ -127,6 +127,19 @@ namespace WebApplicationBeanstalk.Controllers
             return PhysicalFile(Tmp + movie.Id + movie.Video.GetType(), "video/avi", movie.Title);
         }
 
+        [HttpGet]
+        public IActionResult AddComment(string email, string movieId)
+        {
+            AWSServices services = new AWSServices(dynamoDBClient, s3Client);
+            services.AddComment(email, movieId, comment, rate);
+            return View(new UserXMovie()
+            { Movie = services.GetMovie(movieId),
+                User = services.GetUser(email)
+            });
+        }
+
+
+
         [HttpPost]
         public IActionResult AddComment(string email, string movieId, string comment,int rate)
         {

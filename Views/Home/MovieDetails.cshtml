@@ -1,13 +1,16 @@
-﻿@model Movie
+﻿@model UserXMovie
 @{
     ViewData["Title"] = "MovieDetails";
 }
 
 <h2>MovieDetails</h2>
 
-<img src="@Model.Cover.GetPreSignedURL(DateTime.Now.AddHours(1))"
+<img src="@Model.Movie.Cover.GetPreSignedURL(DateTime.Now.AddHours(1))"
      width="500"
      height="600">
+
+
+<a asp-action="AddComment" asp-route-email="@Model.User.Email">Add Comment</a>
 
 
 
@@ -19,29 +22,29 @@
             <th>Rate
             <th>
             <th>Comment
-            <th
-            <th>User name
+            <th>
+            <th>By
             <th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Ratings)
+        @foreach (var item in Model.Movie.Ratings)
         {
-        <tr>
-            <td>
-                @item.Date
-            </td>
-            <td>
-                @item.Rate
-            </td>
-            <td>
-                @item.Comment
-            </td>
+            <tr>
+                <td>
+                    @item.Date
+                </td>
+                <td>
+                    @item.Rate
+                </td>
+                <td>
+                    @item.Comment
+                </td>
 
-            <td>
-                @item.User.Name
-            </td>
-        </tr>
+                <td>
+                    @item.User.Name
+                </td>
+            </tr>
         }
     </tbody>
 </table>
