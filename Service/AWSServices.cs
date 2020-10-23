@@ -8,6 +8,7 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.Model;
 using Amazon.S3;
+using System.Collections;
 
 namespace WebApplicationBeanstalk.Service
 {
@@ -55,7 +56,12 @@ namespace WebApplicationBeanstalk.Service
             List<Movie> movies= await Context.ScanAsync<Movie>(conditions).GetRemainingAsync();
             foreach(Movie movie in movies)
             {
-                //movie.Cover.DownloadTo(Tmp + movie.Id + movie.Cover.GetType());
+                Task task1 = s3Client.DownloadToFilePathAsync(
+                    movie.Cover.BucketName,
+                    movie.Cover.Key, Tmp ,
+                    new Dictionary<string, object>(),
+                    default(System.Threading.CancellationToken));
+
             }
                 
             return movies;
@@ -67,9 +73,22 @@ namespace WebApplicationBeanstalk.Service
 
             Movie movie = await Context.LoadAsync<Movie>(Id, default(System.Threading.CancellationToken));
             //movie.Cover.DownloadTo(Tmp + movie.Id + movie.Cover.GetType());
+
+            Task task1 = s3Client.DownloadToFilePathAsync(
+                    movie.Cover.BucketName,
+                    movie.Cover.Key, Tmp,
+                    new Dictionary<string, object>(),
+                    default(System.Threading.CancellationToken));
+
             if (WithVideo)
             {
                 //movie.Video.DownloadTo(Tmp + movie.Id + movie.Video.GetType());
+
+                Task task2 = s3Client.DownloadToFilePathAsync(
+                        movie.Video.BucketName,
+                        movie.Video.Key, Tmp,
+                        new Dictionary<string, object>(),
+                        default(System.Threading.CancellationToken));
             }
             return movie;
         }
@@ -83,6 +102,19 @@ namespace WebApplicationBeanstalk.Service
             movie.Title = Title;
             movie.Cover = S3Link.Create(Context, bucketName, movie.Id + "1", Region);
             movie.Video = S3Link.Create(Context, bucketName, movie.Id + "2", Region);
+
+            Task task1 = s3Client.UploadObjectFromFilePathAsync(
+                bucketName, 
+                movie.Id + "1",CoverPath,
+                new Dictionary<string,object>(),
+                default(System.Threading.CancellationToken));
+
+            Task task2 = s3Client.UploadObjectFromFilePathAsync(
+                bucketName,
+                movie.Id + "2", VideoPath,
+                new Dictionary<string, object>(),
+                default(System.Threading.CancellationToken));
+
 
             //movie.Cover.UploadFrom(CoverPath);
             //movie.Video.UploadFrom(VideoPath);
