@@ -10,6 +10,11 @@
      height="600">
 
 
+<a href="@Model.Movie.Video.GetPreSignedURL(DateTime.Now.AddHours(1))"
+   >Download Video</a>
+
+
+
 <a asp-action="AddComment" asp-route-email="@Model.User.Email" asp-route-movieId="@Model.Movie.Id">Add Comment</a>
 
 
