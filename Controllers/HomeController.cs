@@ -37,6 +37,7 @@ namespace WebApplicationBeanstalk.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult Movies(string email)
         {
             return View("Movies", new UserXMovies()
@@ -46,6 +47,8 @@ namespace WebApplicationBeanstalk.Controllers
             });
         }
 
+
+        [HttpGet]
         public IActionResult MoviesDetails(string email, string movieId)
         {
             return View("MoviesDetails", new UserXMovie()
