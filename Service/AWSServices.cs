@@ -7,6 +7,7 @@ using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.Model;
+using Amazon.S3;
 
 namespace WebApplicationBeanstalk.Service
 {
@@ -16,10 +17,12 @@ namespace WebApplicationBeanstalk.Service
         RegionEndpoint Region = RegionEndpoint.CACentral1;
 
         IAmazonDynamoDB dynamoDBClient { get; set; }
+        IAmazonS3 s3Client { get; set; }
 
-        public AWSServices(IAmazonDynamoDB dynamoDBClient)
+        public AWSServices(IAmazonDynamoDB dynamoDBClient, IAmazonS3 s3Client)
         {
             this.dynamoDBClient = dynamoDBClient;
+            this.s3Client = s3Client;
             CreateTable();
         }
         public async Task<User> Register(User user)

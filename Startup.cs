@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
+using Amazon.S3;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,7 +34,7 @@ namespace WebApplicationBeanstalk
 
                         services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
-            //   services.AddAWSService<IAmazonS3>();
+             services.AddAWSService<IAmazonS3>();
             services.AddAWSService<IAmazonDynamoDB>();
         }
 
