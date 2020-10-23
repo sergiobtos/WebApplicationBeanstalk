@@ -131,10 +131,9 @@ namespace WebApplicationBeanstalk.Controllers
         public IActionResult AddComment(string email, string movieId)
         {
             AWSServices services = new AWSServices(dynamoDBClient, s3Client);
-            services.AddComment(email, movieId, comment, rate);
             return View(new UserXMovie()
-            { Movie = services.GetMovie(movieId),
-                User = services.GetUser(email)
+            { Movie = services.GetMovie(movieId).Result,
+                User = services.GetUser(email).Result
             });
         }
 
