@@ -9,6 +9,7 @@ using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.Model;
 using Amazon.S3;
 using System.Collections;
+using Amazon.S3.Model;
 
 namespace WebApplicationBeanstalk.Service
 {
@@ -34,6 +35,18 @@ namespace WebApplicationBeanstalk.Service
             return user;
         }
 
+
+        public List<String> GetBuckets()
+        {
+            List<String> buckets = new List<string>();
+            ListBucketsResponse response = s3Client.ListBucketsAsync().Result;
+            foreach (S3Bucket bucket in response.Buckets)
+            {
+                buckets.Add(bucket.BucketName);
+            }
+            return buckets;
+        }
+        
         public async Task<User> LogIn(String email, String password)
         {
             DynamoDBContext Context = new DynamoDBContext(dynamoDBClient);
@@ -122,6 +135,11 @@ namespace WebApplicationBeanstalk.Service
             await Context.SaveAsync<Movie>(movie);
             return await GetMovie(movie.Id,false);
         }
+
+        //public async  void S3Bucket GetS3Bucket(string bucket)
+        //{
+        //    return  s3Client.ListBucketsAsync(). Buckets.Where(b => b.BucketName == bucket).Single();
+        //}
 
         public async void AddComment(string email,string Id, String comment, int rate)
         {

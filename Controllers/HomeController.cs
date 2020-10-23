@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.S3;
+using Amazon.S3.Model;
+using Amazon.S3.Util;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using WebApplicationBeanstalk.Models;
@@ -18,8 +22,9 @@ namespace WebApplicationBeanstalk.Controllers
         private IAmazonDynamoDB dynamoDBClient;
 
         private IAmazonS3 s3Client;
+        
 
-        public HomeController(IAmazonDynamoDB dynamoDBClient,IAmazonS3 s3Client)
+        public HomeController(IAmazonDynamoDB dynamoDBClient, IAmazonS3 s3Client)
         {
             this.dynamoDBClient = dynamoDBClient;
             this.s3Client = s3Client;
@@ -36,8 +41,9 @@ namespace WebApplicationBeanstalk.Controllers
         }
 
         [HttpPost]
-        public IActionResult LogIn (string email, string password)
+        public IActionResult LogIn(string email, string password)
         {
+
             AWSServices services = new AWSServices(dynamoDBClient, s3Client);
             User user = services.LogIn(email, password).Result;
 
@@ -45,19 +51,55 @@ namespace WebApplicationBeanstalk.Controllers
                 return View("Index");
             else
             {
+
                 return Movies(email);
             }
         }
 
         [HttpGet]
         public IActionResult Movies(string email)
-        {
+        { 
             AWSServices services = new AWSServices(dynamoDBClient, s3Client);
-            return View("Movies", new UserXMovies()
+            UserXMovies userXMovies = new UserXMovies()
             {
                 User = services.GetUser(email).Result,
                 Movies = services.GetMovies().Result
-            });
+            };
+            return View("Movies", userXMovies );
+        }
+
+        [HttpPost]
+        public IActionResult Movies()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddMovie(BucketsXMovie bucketsXMovie )
+        {
+            //string temp = file.FileName.Trim();
+
+            if (ModelState.IsValid)
+            {
+                string VideoPath = Path.GetFileName(bucketsXMovie.Video.FileName);
+                string CoverPath = Path.GetFileName(bucketsXMovie.Cover.FileName);
+                AWSServices services = new AWSServices(dynamoDBClient, s3Client);
+                var result = services.UploadMovie(bucketsXMovie.SelectedBucket,
+                    bucketsXMovie.Movie.Title,
+                    VideoPath, 
+                    CoverPath
+                  ).Result; 
+            }
+            return Movies(bucketsXMovie.Email);
+         
+        }
+
+        [HttpGet]
+        public IActionResult AddMovie(string email)
+        {
+            AWSServices services = new AWSServices(dynamoDBClient, s3Client);
+            return View(new BucketsXMovie() { Buckets = services.GetBuckets(),Email=email });
         }
 
 
@@ -113,6 +155,8 @@ namespace WebApplicationBeanstalk.Controllers
             }
             
         }
+
+
 
     }
 }

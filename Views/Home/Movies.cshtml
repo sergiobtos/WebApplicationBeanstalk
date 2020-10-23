@@ -3,17 +3,32 @@
     ViewData["Title"] = "Movies";
 }
 
-<h2>Movies</h2>
 
-<p>
-    <a asp-action="Create">Welcome @Html.DisplayNameFor(model => model.User.Name)</a>
+<h1>Welcome @Model.User.Name Here the list of your movies</h1>
+<p class="lead">
+    If you want to add a new movie, choose a bucket below and click send afterwards.
 </p>
+<div>
+    <a asp-action="AddMovie" asp-route-email="@Model.User.Email">Add Movies</a>
+   
+
+</div>
+
+<div>
+
+
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
-            <th>Id<th>
-            <th>Title<th>
-            <th>#<th>
+            <th>Id
+            <th>
+            <th>Title
+            <th>
+            <th>#
+            <th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +42,7 @@
                     @item.Title
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <button asp-action="Details" asp-route-id="@item.Id" value="Details" formmethod="get" /> |
                 </td>
             </tr>
         }

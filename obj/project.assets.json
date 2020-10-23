@@ -12844,19 +12844,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Caique\\.nuget\\packages\\": {}
+    "C:\\Users\\sergi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\COMP306\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj",
+      "projectUniqueName": "C:\\Comp306_AWSAmazon\\Lab3\\Code\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj",
       "projectName": "WebApplicationBeanstalk",
-      "projectPath": "C:\\COMP306\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj",
-      "packagesPath": "C:\\Users\\Caique\\.nuget\\packages\\",
-      "outputPath": "C:\\COMP306\\WebApplicationBeanstalk\\obj\\",
+      "projectPath": "C:\\Comp306_AWSAmazon\\Lab3\\Code\\WebApplicationBeanstalk\\WebApplicationBeanstalk.csproj",
+      "packagesPath": "C:\\Users\\sergi\\.nuget\\packages\\",
+      "outputPath": "C:\\Comp306_AWSAmazon\\Lab3\\Code\\WebApplicationBeanstalk\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Caique\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sergi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
