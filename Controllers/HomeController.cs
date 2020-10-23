@@ -33,14 +33,44 @@ namespace WebApplicationBeanstalk.Controllers
                 return View("Index");
             else
             {
-                return View("Movies", new UserXMovies()
-                {
-                    User = user,
-                    Movies = services.GetMovies().Result
-                });
+                return Movies(email);
             }
         }
 
+        public IActionResult Movies(string email)
+        {
+            return View("Movies", new UserXMovies()
+            {
+                User = services.GetUser(email),
+                Movies = services.GetMovies().Result
+            });
+        }
+
+        public IActionResult MoviesDetails(string email, string movieId)
+        {
+            return View("MoviesDetails", new UserXMovie()
+            {
+                User = services.GetUser(email),
+                Movie = services.GetMovie(movieId,false).Result
+            });
+        }
+
+        [HttpGet]
+        public ActionResult DownloadMovie(string Id)
+        {
+            string Tmp = AppDomain.CurrentDomain.BaseDirectory;
+            Movie movie = services.GetMovie(Id, true).Result;
+            return PhysicalFile(Tmp + movie.Id + movie.Video.GetType(), "video/avi", movie.Title);
+        }
+
+        [HttpPost]
+        public IActionResult AddComment(string email, string movieId, string comment,int rate)
+        {
+            services.AddComment(email, movieId, comment, rate);
+            return MoviesDetails(email, movieId);
+        }
+
+  
         [HttpPost]
         public IActionResult AddUser (User user)
         {

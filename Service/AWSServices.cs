@@ -15,7 +15,7 @@ namespace WebApplicationBeanstalk.Service
         AmazonDynamoDBClient Client;
         DynamoDBContext Context;
         string Tmp = AppDomain.CurrentDomain.BaseDirectory;
-        RegionEndpoint BucketRegion = RegionEndpoint.CNNorth1;
+        RegionEndpoint BucketRegion = RegionEndpoint.USWest1;
 
         public AWSServices()
         {
@@ -88,6 +88,11 @@ namespace WebApplicationBeanstalk.Service
             });
 
             await Context.SaveAsync<Movie>(movie);
+        }
+
+        public User GetUser(string email)
+        {
+            return Context.Load<User>(email);
         }
 
 
