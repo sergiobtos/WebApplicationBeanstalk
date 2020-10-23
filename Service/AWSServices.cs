@@ -10,6 +10,7 @@ using Amazon.DynamoDBv2.Model;
 using Amazon.S3;
 using System.Collections;
 using Amazon.S3.Model;
+using Amazon.S3.Transfer;
 
 namespace WebApplicationBeanstalk.Service
 {
@@ -80,60 +81,45 @@ namespace WebApplicationBeanstalk.Service
             return movies;
         }
 
-        public async Task<Movie> GetMovie(string Id, Boolean WithVideo)
+        public Task<Movie> GetMovie(string Id)
         {
             DynamoDBContext Context = new DynamoDBContext(dynamoDBClient);
 
-            Movie movie = await Context.LoadAsync<Movie>(Id, default(System.Threading.CancellationToken));
-            //movie.Cover.DownloadTo(Tmp + movie.Id + movie.Cover.GetType());
-
-            Task task1 = s3Client.DownloadToFilePathAsync(
-                    movie.Cover.BucketName,
-                    movie.Cover.Key, Tmp,
-                    new Dictionary<string, object>(),
-                    default(System.Threading.CancellationToken));
-
-            if (WithVideo)
-            {
-                //movie.Video.DownloadTo(Tmp + movie.Id + movie.Video.GetType());
-
-                Task task2 = s3Client.DownloadToFilePathAsync(
-                        movie.Video.BucketName,
-                        movie.Video.Key, Tmp,
-                        new Dictionary<string, object>(),
-                        default(System.Threading.CancellationToken));
-            }
-            return movie;
+            return Context.LoadAsync<Movie>(Id, default(System.Threading.CancellationToken));
+            
         }
 
-        public async Task<Movie> UploadMovie(String bucketName, String Title, String VideoPath, String CoverPath)
+        public async Task<Movie> UploadMovie(String bucketName, String Title, System.IO.Stream VideoPath, System.IO.Stream CoverPath)
         {
             DynamoDBContext Context = new DynamoDBContext(dynamoDBClient);
 
             Movie movie = new Movie();
             movie.Id = System.Guid.NewGuid().ToString();
             movie.Title = Title;
-            movie.Cover = S3Link.Create(Context, bucketName, movie.Id + "1", Region);
-            movie.Video = S3Link.Create(Context, bucketName, movie.Id + "2", Region);
+            movie.Cover = S3Link.Create(Context, bucketName, movie.Id + "1.jpg", Region);
+            movie.Video = S3Link.Create(Context, bucketName, movie.Id + "2.avi", Region);
 
-            Task task1 = s3Client.UploadObjectFromFilePathAsync(
-                bucketName, 
-                movie.Id + "1",CoverPath,
-                new Dictionary<string,object>(),
-                default(System.Threading.CancellationToken));
+            var fileTransferUtility = new TransferUtility(s3Client);
+            var cover = new TransferUtilityUploadRequest()
+            {
+                CannedACL = S3CannedACL.PublicRead,
+                BucketName = bucketName,
+                Key = movie.Id + "1.jpg",
+                InputStream = CoverPath
+            };
 
-            Task task2 = s3Client.UploadObjectFromFilePathAsync(
-                bucketName,
-                movie.Id + "2", VideoPath,
-                new Dictionary<string, object>(),
-                default(System.Threading.CancellationToken));
-
-
-            //movie.Cover.UploadFrom(CoverPath);
-            //movie.Video.UploadFrom(VideoPath);
+            var video = new TransferUtilityUploadRequest()
+            {
+                CannedACL = S3CannedACL.PublicRead,
+                BucketName = bucketName,
+                Key = movie.Id + "2.avi",
+                InputStream = VideoPath
+            };
+            await fileTransferUtility.UploadAsync(cover);
+            await fileTransferUtility.UploadAsync(video);
 
             await Context.SaveAsync<Movie>(movie);
-            return await GetMovie(movie.Id,false);
+            return await GetMovie(movie.Id);
         }
 
         //public async  void S3Bucket GetS3Bucket(string bucket)
@@ -145,7 +131,7 @@ namespace WebApplicationBeanstalk.Service
         {
             DynamoDBContext Context = new DynamoDBContext(dynamoDBClient);
 
-            Movie movie = await GetMovie(Id, false);
+            Movie movie = await GetMovie(Id);
             movie.Ratings.Add(new Rating()
             {
                 Date = DateTime.Now,

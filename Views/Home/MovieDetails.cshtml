@@ -1,7 +1,49 @@
-﻿
+﻿@model Movie
 @{
     ViewData["Title"] = "MovieDetails";
 }
 
 <h2>MovieDetails</h2>
+
+<img src="@Model.Cover.GetPreSignedURL(DateTime.Now.AddHours(1))"
+     width="500"
+     height="600">
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date
+            <th>
+            <th>Rate
+            <th>
+            <th>Comment
+            <th
+            <th>User name
+            <th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Ratings)
+        {
+        <tr>
+            <td>
+                @item.Date
+            </td>
+            <td>
+                @item.Rate
+            </td>
+            <td>
+                @item.Comment
+            </td>
+
+            <td>
+                @item.User.Name
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
 

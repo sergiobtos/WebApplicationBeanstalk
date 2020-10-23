@@ -78,17 +78,21 @@ namespace WebApplicationBeanstalk.Controllers
         [HttpPost]
         public IActionResult AddMovie(BucketsXMovie bucketsXMovie )
         {
-            //string temp = file.FileName.Trim();
+            string Tmp = AppDomain.CurrentDomain.BaseDirectory;
 
             if (ModelState.IsValid)
             {
-                string VideoPath = Path.GetFileName(bucketsXMovie.Video.FileName);
-                string CoverPath = Path.GetFileName(bucketsXMovie.Cover.FileName);
+
+                var video = new MemoryStream();
+                bucketsXMovie.Video.CopyTo(video);
+                var cover = new MemoryStream();
+                bucketsXMovie.Cover.CopyTo(cover);
+
                 AWSServices services = new AWSServices(dynamoDBClient, s3Client);
                 var result = services.UploadMovie(bucketsXMovie.SelectedBucket,
                     bucketsXMovie.Movie.Title,
-                    VideoPath, 
-                    CoverPath
+                    video, 
+                    cover
                   ).Result; 
             }
             return Movies(bucketsXMovie.Email);
@@ -104,13 +108,13 @@ namespace WebApplicationBeanstalk.Controllers
 
 
         [HttpGet]
-        public IActionResult MoviesDetails(string email, string movieId)
+        public IActionResult MovieDetails(string email, string movieId)
         {
             AWSServices services = new AWSServices(dynamoDBClient, s3Client);
-            return View("MoviesDetails", new UserXMovie()
+            return View(new UserXMovie()
             {
                 User = services.GetUser(email).Result,
-                Movie = services.GetMovie(movieId,false).Result
+                Movie = services.GetMovie(movieId).Result
             });
         }
 
@@ -119,7 +123,7 @@ namespace WebApplicationBeanstalk.Controllers
         {
             AWSServices services = new AWSServices(dynamoDBClient, s3Client);
             string Tmp = AppDomain.CurrentDomain.BaseDirectory;
-            Movie movie = services.GetMovie(Id, true).Result;
+            Movie movie = services.GetMovie(Id).Result;
             return PhysicalFile(Tmp + movie.Id + movie.Video.GetType(), "video/avi", movie.Title);
         }
 
@@ -128,7 +132,7 @@ namespace WebApplicationBeanstalk.Controllers
         {
             AWSServices services = new AWSServices(dynamoDBClient, s3Client);
             services.AddComment(email, movieId, comment, rate);
-            return MoviesDetails(email, movieId);
+            return MovieDetails(email, movieId);
         }
 
   
