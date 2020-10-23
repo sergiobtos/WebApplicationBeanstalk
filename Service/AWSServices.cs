@@ -48,13 +48,17 @@ namespace WebApplicationBeanstalk.Service
             var conditions = new List<ScanCondition>();
             List<Movie> movies= await Context.ScanAsync<Movie>(conditions).GetRemainingAsync();
             foreach(Movie movie in movies)
-                movie.Cover.DownloadTo(Tmp + movie.Id + ".jpg");
+                movie.Cover.DownloadTo(Tmp + movie.Id + movie.Cover.GetType());
             return movies;
         }
 
-        public async Task<Movie> GetMovie(string Id)
+        public async Task<Movie> GetMovie(string Id, Boolean WithVideo)
         {
-            return await Context.LoadAsync<Movie>(Id, default(System.Threading.CancellationToken));
+            Movie movie = await Context.LoadAsync<Movie>(Id, default(System.Threading.CancellationToken));
+            movie.Cover.DownloadTo(Tmp + movie.Id + movie.Cover.GetType());
+            if (WithVideo)
+                movie.Video.DownloadTo(Tmp + movie.Id + movie.Video.GetType());
+            return movie;
         }
 
         public async Task<Movie> UploadMovie(String bucketName, String Title, String VideoPath, String CoverPath)
@@ -69,148 +73,22 @@ namespace WebApplicationBeanstalk.Service
             movie.Video.UploadFrom(VideoPath);
 
             await Context.SaveAsync<Movie>(movie);
-            return await GetMovie(movie.Id);
+            return await GetMovie(movie.Id,false);
         }
 
+        public async void AddComment(string email,string Id, String comment, int rate)
+        {
+            Movie movie = await GetMovie(Id, false);
+            movie.Ratings.Add(new Rating()
+            {
+                Date = DateTime.Now,
+                Comment = comment,
+                Rate = rate,
+                User = await Context.LoadAsync<User>(email)
+            });
 
-        //public void AddBook(String email, String title, String bucketName, String coverPath, String pdfPath)
-        //{
-
-        //    String date = DateTime.Now.ToString("yyyyMMddTHHmmssfff");
-
-        //    Movie movie = new Movie();
-        //    movie.Cover = S3Link.Create(Context, bucketName, email + "1" + date, BucketRegion);
-        //    movie.PDFFile = S3Link.Create(Context, bucketName, email + "2" + date, BucketRegion);
-        //    movie.Title = title;
-        //    movie.Page = 1;
-        //    movie.IsLastBook = true;
-
-        //    movie.Cover.UploadFrom(coverPath);
-        //    movie.PDFFile.UploadFrom(pdfPath);
-
-        //    User userDB = Context.Load<User>(email, new DynamoDBContextConfig
-        //    {
-        //        ConsistentRead = true
-        //    });
-
-        //    if (userDB.Books == null)
-        //    {
-        //        userDB.Books = new List<Movie>();
-        //    }
-        //    else
-        //    {
-        //        foreach (Movie book in userDB.Books)
-        //        {
-        //            book.IsLastBook = false;
-        //        }
-        //    }
-        //    userDB.Books.Add(movie);
-        //    Context.Save<User>(userDB);
-        //}
-
-        //public void UpdatePage(String email, String title, int lastPage)
-        //{
-        //    User userDB = Context.Load<User>(email, new DynamoDBContextConfig
-        //    {
-        //        ConsistentRead = true
-        //    });
-
-        //    foreach (Movie movie in userDB.Books)
-        //    {
-        //        if (movie.Title.Equals(title))
-        //        {
-        //            movie.Page = lastPage;
-        //            break;
-        //        }
-        //    }
-        //    Context.Save<User>(userDB);
-        //}
-
-        //public Movie ReadBook(String email, String title)
-        //{
-        //    User userDB = Context.Load<User>(email, new DynamoDBContextConfig
-        //    {
-        //        ConsistentRead = true
-        //    });
-        //    Movie currentBook = null;
-        //    foreach (Movie movie in userDB.Books)
-        //    {
-        //        if (movie.Title.Equals(title))
-        //        {
-        //            movie.IsLastBook = true;
-        //            currentBook = movie;
-        //        }
-        //        else
-        //        {
-        //            movie.IsLastBook = false;
-        //        }
-        //    }
-        //    Context.Save<User>(userDB);
-        //    DownloadFiles(currentBook);
-        //    return currentBook;
-        //}
-
-
-        //public void DownloadFiles(Movie movie)
-        //{
-        //    Boolean found = false;
-        //    int attemps = 0;
-        //    while (!found && attemps <= 5)
-        //    {
-        //        try
-        //        {
-        //            if (!System.IO.File.Exists(tmp + movie.Title + ".jpg"))
-        //                movie.Cover.DownloadTo(tmp + movie.Title + ".jpg");
-        //            if (!System.IO.File.Exists(tmp + movie.Title + ".pdf"))
-        //                movie.PDFFile.DownloadTo(tmp + movie.Title + ".pdf");
-
-        //            if (System.IO.File.Exists(tmp + movie.Title + ".jpg")
-        //                && System.IO.File.Exists(tmp + movie.Title + ".pdf"))
-        //            {
-        //                found = true;
-        //                break;
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Console.WriteLine("Failed attempt (" + attemps + ") to retrieve the book (" + movie.Title + ")");
-        //            attemps++;
-        //        }
-        //    }
-
-
-        //}
-
-
-        //public List<Movie> GetAllBooks(String email)
-        //{
-        //    User userDB = Context.Load<User>(email);
-        //    List<Movie> movies = new List<Movie>();
-        //    foreach (var book in userDB.Books)
-        //    {
-        //        movies.Add(book);
-        //    }
-        //    return movies;
-        //}
-
-        //public Movie GetLastBook(String email)
-        //{
-        //    User userDB = Context.Load<User>(email);
-        //    Movie lastBook = null;
-        //    if (userDB.Books != null)
-        //    {
-        //        foreach (Movie movie in userDB.Books)
-        //        {
-        //            if (movie.IsLastBook)
-        //            {
-        //                lastBook = movie;
-        //                DownloadFiles(lastBook);
-        //            }
-        //        }
-        //    }
-
-        //    return lastBook;
-        //}
+            await Context.SaveAsync<Movie>(movie);
+        }
 
 
         public void CreateTable()

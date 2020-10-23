@@ -20,7 +20,7 @@ namespace WebApplicationBeanstalk.Models
         public S3Link Video { get; set; }
 
         [DynamoDBProperty(AttributeName = "Ratings")]
-        public List<Rating> Ratings { get; set; }
+        public List<Rating> Ratings { get; set; } = new List<Rating>();
 
     }
 }
