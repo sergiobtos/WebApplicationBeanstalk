@@ -44,15 +44,18 @@ namespace WebApplicationBeanstalk.Controllers
         public IActionResult LogIn(string email, string password)
         {
 
+            if (!ModelState.IsValid)
+                return View();
+
             AWSServices services = new AWSServices(dynamoDBClient, s3Client);
             User user = services.LogIn(email, password).Result;
-
+            
             if (user == null)
-                return View("Index");
+                return View();
             else
             {
 
-                return Movies(email);
+                return RedirectToAction("Movies",new { email = email });
             }
         }
 
@@ -131,20 +134,20 @@ namespace WebApplicationBeanstalk.Controllers
         public IActionResult AddComment(string email, string movieId)
         {
             AWSServices services = new AWSServices(dynamoDBClient, s3Client);
-            return View(new UserXMovie()
-            { Movie = services.GetMovie(movieId).Result,
-                User = services.GetUser(email).Result
+            return View(new MovieXRating()
+            {
+                Movie = services.GetMovie(movieId).Result,
+                User = services.GetUser(email).Result,
+                Rating = new Rating()
             });
         }
-
-
 
         [HttpPost]
         public IActionResult AddComment(string email, string movieId, string comment,int rate)
         {
             AWSServices services = new AWSServices(dynamoDBClient, s3Client);
             services.AddComment(email, movieId, comment, rate);
-            return MovieDetails(email, movieId);
+            return RedirectToAction("MovieDetails", new { email = email, movieId = movieId });
         }
 
   

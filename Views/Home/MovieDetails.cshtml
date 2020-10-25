@@ -3,55 +3,61 @@
     ViewData["Title"] = "MovieDetails";
 }
 
-<h2>MovieDetails</h2>
 
-<img src="@Model.Movie.Cover.GetPreSignedURL(DateTime.Now.AddHours(1))"
-     width="500"
-     height="600">
+   
+        <div class="col-md-5 px-10">
+            <h1 class="display-4 font-italic">Movie details</h1>
+           
+        </div>
 
-
-<a href="@Model.Movie.Video.GetPreSignedURL(DateTime.Now.AddHours(1))"
-   >Download Video</a>
-
-
-
-<a asp-action="AddComment" asp-route-email="@Model.User.Email" asp-route-movieId="@Model.Movie.Id">Add Comment</a>
-
-
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Date
-            <th>
-            <th>Rate
-            <th>
-            <th>Comment
-            <th>
-            <th>By
-            <th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Movie.Ratings)
-        {
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary">Title: </strong>
+                        <h3 class="mb-0">@Model.Movie.Title</h3>
+                       Average rate: @(Math.Round(Model.Movie.Ratings.Sum(r => r.Rate)/(double)Model.Movie.Ratings.Count,2))
+                        <p class="card-text mb-auto">In this page you can see the picture, download, add comment and ratings of the movie.</p>
+                        <a href="@Model.Movie.Video.GetPreSignedURL(DateTime.Now.AddHours(1))">Download Video</a>
+                        <a asp-action="AddComment" asp-route-email="@Model.User.Email" asp-route-movieId="@Model.Movie.Id">Add Comment</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img  width="200" height="250" src="@Model.Movie.Cover.GetPreSignedURL(DateTime.Now.AddHours(1))">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @item.Date
-                </td>
-                <td>
-                    @item.Rate
-                </td>
-                <td>
-                    @item.Comment
-                </td>
-
-                <td>
-                    @item.User.Name
-                </td>
+                <th>Date</th>
+                <th>Rate</th>
+                <th>Comment</th>
+                <th>By</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Movie.Ratings)
+            {
+                <tr>
+                    <td>
+                        @item.Date
+                    </td>
+                    <td>
+                        @item.Rate
+                    </td>
+                    <td>
+                        @item.Comment
+                    </td>
+
+                    <td>
+                        @item.User.Name
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
 
 

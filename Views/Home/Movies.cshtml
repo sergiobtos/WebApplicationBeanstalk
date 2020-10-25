@@ -4,27 +4,20 @@
 }
 
 
-<h1>Welcome @Model.User.Name Here the list of your movies</h1>
+<h1>Welcome @Model.User.Name here the list of your movies</h1>
 <p class="lead">
-    If you want to add a new movie, choose a bucket below and click send afterwards.
+    If you want to add a new movie, click <a asp-action="AddMovie" asp-route-email="@Model.User.Email">here</a>.
 </p>
-<div>
-    <a asp-action="AddMovie" asp-route-email="@Model.User.Email">Add Movies</a>
-   
 
-</div>
-
-<div>
-
-
-</div>
 
 
 <table class="table">
     <thead>
         <tr>
-            <th>Title<th>
-            <th>#<th>
+            <th>#</th>
+            <th>Title</th>
+            <th>Average Rate</th>
+            <th>#</th>
         </tr>
     </thead>
     <tbody>
@@ -33,12 +26,15 @@
             <tr>
                 <td>
                     <img src="@item.Cover.GetPreSignedURL(DateTime.Now.AddHours(1))" 
-                         width="500" 
-                         height="600">
+                         width="80" 
+                         height="80">
                  
                 </td>
                 <td>
                     @item.Title
+                </td>
+                <td>
+                    @(Math.Round(item.Ratings.Sum(r => r.Rate)/(double)item.Ratings.Count,2))
                 </td>
                 <td>
                     <a asp-action="MovieDetails" asp-route-email="@Model.User.Email"

@@ -70,3 +70,4 @@ C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\WebApplicationBeansta
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Home\AddMovie.cshtml.g.cs
 C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Home\MovieDetails.cshtml.g.cs
 C:\COMP306\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Home\AddMovie.cshtml.g.cs
+C:\Comp306_AWSAmazon\Lab3\Code\WebApplicationBeanstalk\obj\Debug\netcoreapp2.1\Razor\Views\Home\AddComment.cshtml.g.cs
